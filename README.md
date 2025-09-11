@@ -1,6 +1,6 @@
 # 🚍 Fleet Manager
 
-**Version:** 0.0.9  
+**Version:** 0.1.0
 A lightweight fleet management system built with **Flask** and **Pandas**, designed for importing, editing, and monitoring vehicle spreadsheets (Excel files).  
 Originally developed for CTO department operations, but can be adapted to other organizations.  
 
