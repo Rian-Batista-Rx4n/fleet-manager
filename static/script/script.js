@@ -95,23 +95,24 @@ function menu_button_trigger() {
     }
 }
 
-
-// Filtro/Ordenar
 // ===== ORDENAR TABELA =====
-let sortDirection = true; // true = asc, false = desc
+const sortDirections = {}; // guarda direção por índice
 
 function sortTable(colIndex) {
-    const table = document.querySelector("table tbody");
+    const table = document.querySelector(".tabela-box table tbody");
     const rows = Array.from(table.rows);
+
+    let sortDirection = sortDirections[colIndex] ?? true; // true = asc
 
     rows.sort((a, b) => {
         let x = a.cells[colIndex].innerText.trim().toLowerCase();
         let y = b.cells[colIndex].innerText.trim().toLowerCase();
 
-        // tenta converter para número se possível
-        if (!isNaN(x) && !isNaN(y)) {
-            x = Number(x);
-            y = Number(y);
+        let xNum = parseFloat(x.replace(/[^0-9.-]+/g,""));
+        let yNum = parseFloat(y.replace(/[^0-9.-]+/g,""));
+        if (!isNaN(xNum) && !isNaN(yNum)) {
+            x = xNum;
+            y = yNum;
         }
 
         if (x < y) return sortDirection ? -1 : 1;
@@ -119,14 +120,12 @@ function sortTable(colIndex) {
         return 0;
     });
 
-    // alterna a direção
-    sortDirection = !sortDirection;
-
-    // aplica a nova ordem
+    sortDirections[colIndex] = !sortDirection; // alterna direção
     rows.forEach(row => table.appendChild(row));
 }
 
-// ===== FILTRAR POR STATUS =====
+
+// ===== FILTRAR POR FROTA (otimizado com pré-indexação) =====
 function debounce(func, delay) {
     let timeout;
     return function (...args) {
@@ -135,17 +134,25 @@ function debounce(func, delay) {
     };
 }
 
+// Monta o índice de busca assim que a página carrega
+// Monta o índice de busca assim que a página carrega
+const filterRows = document.querySelectorAll("table tbody tr");
+const index = Array.from(filterRows).map(row => ({
+    element: row,
+    text: row.innerText.toLowerCase()
+}));
+
+
 const filterInput = document.getElementById("filter");
 
 filterInput.addEventListener("input", debounce(function () {
     const filter = this.value.toLowerCase();
-    const rows = document.querySelectorAll("table tbody tr");
-
-    rows.forEach(row => {
-        const status = row.cells[1].innerText.toLowerCase();
-        row.style.display = status.includes(filter) ? "" : "none";
+    index.forEach(item => {
+        item.element.style.display = item.text.includes(filter) ? "" : "none";
     });
-}, 1000));
+}, 300));
+
+
 
 // =====--- RESUME-PUSH ---=====
 const resumePush = document.getElementById("resume-push");

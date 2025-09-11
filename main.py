@@ -75,8 +75,7 @@ def importar_excel():
 
     return redirect(url_for("home"))
 
-
-# =====--- ATUALIZAR INDEX ---=====
+# =====--- Atualizando Index.html
 @app.route("/atualizar_status", methods=["POST"])
 def atualizar_status():
     try:
@@ -85,13 +84,20 @@ def atualizar_status():
     except (FileNotFoundError, json.JSONDecodeError):
         dados = []
 
-    # request.form chega assim: {"FROTA_72": "Novo", "FROTA_13": "Acidente", ...}
+    # request.form chega assim:
+    # {"FROTA_72": "Novo", "OBS_72": "Precisa revisão", ...}
     for key, value in request.form.items():
         if key.startswith("FROTA_"):
             frota_id = key.replace("FROTA_", "")
             for d in dados:
                 if str(d["FROTA"]) == frota_id:
                     d["STATUS"] = value
+
+        elif key.startswith("OBS_"):
+            frota_id = key.replace("OBS_", "")
+            for d in dados:
+                if str(d["FROTA"]) == frota_id:
+                    d["OBSERVAÇÃO"] = value
 
     with open("data/data.json", "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=4, ensure_ascii=False)
@@ -170,24 +176,62 @@ def detalhes(id):
         dados = []
 
     frota = next((item for item in dados if str(item["FROTA"]) == str(id)), None)
-
     if not frota:
         abort(404, description="Frota não encontrada")
 
-    # 🔎 Verifica se existe imagem da frota na pasta "photos"
+    # foto principal da frota
     foto_path = None
     for ext in ["jpg", "jpeg", "png", "gif"]:
         tentativa = os.path.join(app.config["UPLOAD_FOLDER"], f"{id}.{ext}")
         if os.path.exists(tentativa):
             foto_path = url_for("static", filename=f"photos/{id}.{ext}")
             break
-
     if not foto_path:
         foto_path = url_for("static", filename="images/sem_foto.png")
-
     frota["foto_path"] = foto_path
 
-    return render_template("info_frota.html", frota=frota)
+    # listar fotos de agregados
+    fotos_agregado = []
+    folder = app.config["UPLOAD_FOLDER"]
+    for f in os.listdir(folder):
+        if f.startswith(f"{id}-") and f.lower().endswith(("jpg","jpeg","png","gif")):
+            fotos_agregado.append(url_for("static", filename=f"photos/{f}"))
+    fotos_agregado.sort()  # garante ordem 1,2,3
+
+
+    return render_template("info_frota.html", frota=frota, fotos_agregado=fotos_agregado)
+
+# =====--- Agregados Fotos ---=====
+@app.route("/upload_agregado/<id>", methods=["POST"])
+def upload_agregado(id):
+    if "foto_agregado" not in request.files:
+        flash("Nenhum arquivo enviado")
+        return redirect(url_for("detalhes", id=id))
+
+    file = request.files["foto_agregado"]
+    folder = app.config["UPLOAD_FOLDER"]
+    os.makedirs(folder, exist_ok=True)
+
+    # contar quantas fotos de agregado já existem
+    existentes = [f for f in os.listdir(folder) if f.startswith(f"{id}-") and f.lower().endswith(("jpg","jpeg","png","gif"))]
+    existentes.sort()
+
+    # definir número do agregado automaticamente
+    next_num = len(existentes) + 1
+
+    # manter extensão original
+    ext = file.filename.rsplit(".", 1)[1].lower()
+    filename = f"{id}-{next_num}.{ext}"
+    caminho = os.path.join(folder, filename)
+
+    if file and allowed_file(file.filename):
+        file.save(caminho)
+        flash(f"Foto do agregado {next_num} salva com sucesso!")
+    else:
+        flash("Arquivo inválido")
+
+    return redirect(url_for("detalhes", id=id))
+
 
 # =====--- SALVAR FOTO ---=====
 @app.route("/upload_foto/<id>", methods=["POST"])
@@ -208,7 +252,23 @@ def upload_foto(id):
 
     return redirect(url_for("detalhes", id=id))
 
+# =====--- Deletar Agregado ---=====
+@app.route("/delete_agregado/<frota_id>/<int:index>", methods=["POST"])
+def delete_agregado(frota_id, index):
+    folder = app.config["UPLOAD_FOLDER"]
+
+    # lista fotos da frota
+    fotos = sorted([f for f in os.listdir(folder) if f.startswith(f"{frota_id}-") and f.lower().endswith(("jpg","jpeg","png","gif"))])
+    
+    if 0 <= index < len(fotos):
+        caminho = os.path.join(folder, fotos[index])
+        os.remove(caminho)
+        flash(f"Foto {fotos[index]} deletada com sucesso!")
+    else:
+        flash("Foto não encontrada.")
+
+    return redirect(url_for("detalhes", id=frota_id))
 
 # =====--- FIN ---=====
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5050)
+    app.run(debug=False, host='0.0.0.0', port=5050)
