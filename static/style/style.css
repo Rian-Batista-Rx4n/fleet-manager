@@ -1,0 +1,280 @@
+:root{
+    --cor-primaria: white;
+    --cor-secundaria: black;
+    --cor-terceira: steelblue;
+    --cor-quarta: lime;
+    --cor-quinta: red;
+    --cor-sexta: #59b451;
+    --cor-setima: #f5d20a;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--cor-primaria);
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 64px;
+    background: var(--cor-terceira);
+    display: flex;
+}
+
+.texto-tiete-logo {
+    color: var(--cor-primaria);
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 16px;
+    margin-left: 64px;
+}
+
+.tiete-logo {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+.menu-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    display: block;
+}
+
+#line-1, #line-2, #line-3 {
+    width: 48px;
+    height: 4px;
+    background: var(--cor-primaria);
+    margin: 9px auto;
+    transition: ease 0.2s;
+}
+
+#menu-box {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    border-radius: 0 0 0 16px;
+    background: var(--cor-sexta);
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    box-shadow: 24px 24px 24px rgba(0, 0, 0, 0.25);
+    transition: ease 0.2s;
+    z-index: 5;
+}
+
+.titulo {
+    color: var(--cor-secundaria);
+    margin: 98px auto;
+    text-align: center;
+}
+
+.tools-box {
+    display: flex;
+    margin: 8px;
+    text-align: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tools-button {
+    cursor: pointer;
+    width: 0px;
+    height: 0px;
+    background: var(--cor-terceira);
+    border-radius: 18px;
+    border: none;
+    color: var(--cor-primaria);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 0px;
+    transition: ease 0.2s;
+    line-height: 24px;
+    transition: ease 0.1s;
+}
+
+.tools-button:hover {
+    background: var(--cor-setima);
+    transform: scale(1.05);
+    color: var(--cor-secundaria);
+}
+
+.tabela-box {
+    width: 90%;
+    padding: 1em;
+    border: solid 2px var(--cor-secundaria);
+    border-radius: 8px;
+    margin: auto;
+    overflow-x: auto;
+}
+
+table {
+    text-align: center;
+    border: solid 1px var(--cor-secundaria);
+    border-radius: 4px;
+    margin: 4px auto;
+    font-size: 18px;
+}
+
+.input-table {
+    background: transparent;   /* fundo transparente */
+    width: auto;               /* ocupa apenas o necessário */
+    text-align: center;        /* mantém alinhado como texto */
+    padding: 1em;                /* remove espaçamento interno */
+    margin: 0;                 /* remove margem */
+    font: inherit;             /* herda fonte da tabela */
+    color: inherit;            /* usa mesma cor do texto */
+    border: solid 1px var(--cor-secundaria);
+}
+
+.input-table:focus {
+    border: 1px solid var(--cor-terceira);
+    background: #eef7ff;
+}
+
+.select-table {
+    background: transparent;   /* fundo transparente */
+    width: auto;               /* ocupa apenas o necessário */
+    text-align: center;        /* mantém alinhado como texto */
+    padding: 0.8em;                /* remove espaçamento interno */
+    margin: 0;                 /* remove margem */
+    font: inherit;             /* herda fonte da tabela */
+    color: inherit;            /* usa mesma cor do texto */
+    border: solid 1px var(--cor-secundaria);
+    font-weight: bold;
+}
+
+th {               
+    background: #57caf6;         
+    border: solid 1px var(--cor-secundaria);
+    padding: 0.5em;
+    cursor: pointer;
+    z-index: 5;                  
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+th:hover {
+    background: var(--cor-setima);
+}
+tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.100);
+}
+
+footer {
+    text-align: center;
+    height: 98px;
+    background: var(--cor-terceira);
+    color: var(--cor-primaria);
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.filter-box {
+    margin: 12px auto;
+    width: 90%;
+    text-align: center;
+}
+
+.filter-box input {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--cor-secundaria);
+    width: 200px;
+}
+
+#info {
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    background: var(--cor-sexta);
+    padding: 0.6em;
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#salvar {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9;
+}
+
+.font-size-tool{
+    display: flex;
+    margin: 4px auto;
+    gap: 12px;
+    text-align: center;
+    justify-content: center;
+}
+
+#uppercase-button, #lowercase-button {
+    width: 0px;
+    height: 0px;
+    background: none;
+    border-radius: 12px;
+    padding: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+#resume-push {
+    position: fixed;
+    z-index: 2;
+    width: 448px;
+    height: 28px; /* só a "aba" visível */
+    background: var(--cor-terceira);
+    border: solid 1px black;
+    border-radius: 0 0 12px 12px;
+    top: 64px;
+    right: 64px;
+    overflow: hidden;         /* 🔹 esconde conteúdo */
+    transition: height 0.3s ease;
+    cursor: pointer;          /* mostra que é clicável */
+}
+
+.resume-table {
+    background: var(--cor-sexta);
+    transition: ease 0.3s;
+}
+
+/* tabela escondida no estado inicial */
+#resume-push.collapsed .resume-table {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    table {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 0.5em;
+    }
+    #resume-push {
+        position: fixed;
+        width: 358px;
+        right: 0px;
+        top: 64px;
+        text-align: center;
+    }
+}

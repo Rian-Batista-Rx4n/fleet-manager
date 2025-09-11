@@ -1,0 +1,182 @@
+:root{
+    --cor-primaria: white;
+    --cor-secundaria: black;
+    --cor-terceira: steelblue;
+    --cor-quarta: lime;
+    --cor-quinta: red;
+    --cor-sexta: #59b451;
+    --cor-setima: #f5d20a;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--cor-primaria);
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 64px;
+    background: var(--cor-terceira);
+    display: flex;
+}
+
+.texto-tiete-logo {
+    color: var(--cor-primaria);
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 16px;
+    margin-left: 64px;
+}
+
+.tiete-logo {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+.menu-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--cor-primaria);
+    cursor: pointer;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+
+#menu-box {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    border-radius: 0 0 0 16px;
+    background: var(--cor-sexta);
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    box-shadow: 24px 24px 24px rgba(0, 0, 0, 0.25);
+    transition: ease 0.2s;
+}
+
+.ficha-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    width: 600px;
+    padding: 2em;
+    margin: 100px auto;
+    font-family: Arial, sans-serif;
+}
+
+.ficha-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--cor-terceira);
+}
+
+.frota-imagem {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 260px;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid #000;
+    border-radius: 8px;
+}
+
+.ficha-info {
+    border-top: 2px solid var(--cor-terceira);
+    padding-top: 10px;
+}
+
+.ficha-info p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.ficha-info strong {
+    color: #000;
+    font-weight: bold;
+}
+
+
+form {
+    display: flex;
+}
+
+.submit-photo {
+    width: 98px;
+    height: 48px;
+    background: var(--cor-terceira);
+    border-radius: 18px;
+    border: none;
+    color: var(--cor-primaria);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    transition: ease 0.2s;
+    cursor: pointer;
+    margin: 4px auto;
+    text-align: center;
+    line-height: 48px;
+}
+
+.submit-photo:hover {
+    transform: scale(1.05);
+    background: var(--cor-setima);
+    color: var(--cor-secundaria);
+}
+.tools-button {
+    width: 128px;
+    height: 64px;
+    background: var(--cor-terceira);
+    border-radius: 18px;
+    border: none;
+    color: var(--cor-primaria);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    transition: ease 0.2s;
+    margin: -92px auto;
+}
+
+.tools-button:hover {
+    background: #59b552;
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    height: 98px;
+    background: var(--cor-terceira);
+    color: var(--cor-primaria);
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+@media (max-width: 800px) {
+    .frota-imagem {
+        margin: auto;
+        width: 300px;
+        height: 300px;
+    }
+    .ficha-card {
+        width: 90%;
+        padding: 1em;
+    }
+}
