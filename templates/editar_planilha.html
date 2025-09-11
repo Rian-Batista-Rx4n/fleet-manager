@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/tiete_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../static/style/editar_planilha.css">
+    <title>CTO - Editar</title>
+</head>
+<body>
+    <header>
+        <img src="../static/images/tiete_logo.png" alt="Tiete Logo" class="tiete-logo">
+        <p class="texto-tiete-logo">CTO</p>
+        <div class="menu-button" id="menu-button">
+            <div id="line-1"></div>
+            <div id="line-2"></div>
+            <div id="line-3"></div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="titulo">Editando Planilha</h1>
+        <section>
+            <form action="/editar" method="post">
+                <div class="editar-planilha-box">  
+                    <table>
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">UND</th>
+                                <th onclick="sortTable(1)">FROTA</th>
+                                <th onclick="sortTable(2)">DESCRIÇÃO</th>
+                                <th onclick="sortTable(3)">ANO</th>
+                                <th onclick="sortTable(4)">CHASSIS</th>
+                                <th onclick="sortTable(5)">SERIE</th>
+                                <th onclick="sortTable(6)">PLACA</th>
+                                <th onclick="sortTable(7)">AGREGADO</th>
+                                <th onclick="sortTable(8)">TELEMETRIA</th>
+                                <th onclick="sortTable(9)">RASTREAMENTO</th>
+                                <th onclick="sortTable(10)">TRIMBLE</th>
+                                <th onclick="sortTable(11)">STATUS</th>
+                                <th onclick="sortTable(12)">OBSERVAÇÃO</th>
+                                <th>EXTRA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="row">
+                            {% for frota in dados %}
+                            <tr>
+                                <tr>
+                                    <td><input class="input-table" id="UNIDADE" type="text" name="UNIDADE" value="{{ frota['UNIDADE'] }}"></td>
+                                    <td><input class="input-table" id="FROTA" type="text" name="FROTA" value="{{ frota['FROTA'] }}"></td>
+                                    <td><input class="input-table" id="DESCRICAO" type="text" name="DESCRICAO" value="{{ frota['DESCRICAO'] }}"></td>
+                                    <td><input class="input-table" id="ANO" type="text" name="ANO" value="{{ frota['ANO'] }}"></td>
+                                    <td><input class="input-table" id="CHASSIS" type="text" name="CHASSIS" value="{{ frota['CHASSIS'] }}"></td>
+                                    <td><input class="input-table" id="SERIE" type="text" name="SERIE" value="{{ frota['SERIE'] }}"></td>
+                                    <td><input class="input-table" id="PLACA" type="text" name="PLACA" value="{{ frota['PLACA'] }}"></td>
+                                    <td><input class="input-table" id="AGREGADO" type="text" name="AGREGADO" value="{{ frota['AGREGADO'] }}"></td>
+                                    <td><input class="input-table" id="TELEMETRIA" type="text" name="TELEMETRIA" value="{{ frota['TELEMETRIA'] }}"></td>
+                                    <td><input class="input-table" id="RASTREAMENTO" type="text" name="RASTREAMENTO" value="{{ frota['RASTREAMENTO'] }}"></td>
+                                    <td><input class="input-table" id="SENSOR_FADIGA" type="text" name="SENSOR FADIGA" value="{{ frota['SENSOR FADIGA'] }}"></td>
+                                    <td>
+                                        <select name="FOTO">
+                                            <option value="" {% if frota['FOTO'] == "" %}selected{% endif %}>Em branco</option>
+                                            <option value="OK" {% if frota['FOTO'] == "OK" %}selected{% endif %}>OK</option>
+                                            <option value="Acidente" {% if frota['FOTO'] == "Acidente" %}selected{% endif %}>Acidente</option>
+                                            <option value="Vendido" {% if frota['FOTO'] == "Vendido" %}selected{% endif %}>Vendido</option>
+                                            <option value="Frota Adesiva Errada" {% if frota['FOTO'] == "Frota Adesiva Errada" %}selected{% endif %}>Frota Adesiva Errada</option>
+                                            <option value="Sem Identificação" {% if frota['FOTO'] == "Sem Identificação" %}selected{% endif %}>Sem Identificação</option>
+                                            <option value="Manutenção Externa" {% if frota['FOTO'] == "Manutenção Externa" %}selected{% endif %}>Manutenção Externa</option>
+                                            <option value="Não Encontrado" {% if frota['FOTO'] == "Não Encontrado" %}selected{% endif %}>Não Encontrado</option>
+                                            <option value="Não Estava Na Base" {% if frota['FOTO'] == "Não Estava Na Base" %}selected{% endif %}>Não Estava Na Base</option>
+                                            <option value="Filial Errada" {% if frota['FOTO'] == "Filial Errada" %}selected{% endif %}>Filial Errada</option>
+                                            <option value="Novo" {% if frota['FOTO'] == "Novo" %}selected{% endif %}>Novo</option>
+                                            <option value="Sucata" {% if frota['FOTO'] == "Sucata" %}selected{% endif %}>Sucata</option>
+                                            <option value="Obs." {% if frota['FOTO'] == "Obs." %}selected{% endif %}>Obs.</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="input-table" id="OBSERVACAO" type="text" name="OBSERVAÇÃO" value="{{ frota['OBSERVAÇÃO'] }}"></td>
+                                    <td class="delete-row">X</td>
+                                </tr>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="menu-box">
+                    <div class="tools-box">
+                        <button type="button" id="add-row" class="tools-button">Adicionar Linha</button>
+                        <button type="submit" class="tools-button">Salvar</button>
+                    </div>
+
+                    <div class="filter-box">
+                        <label for="filter">Buscar Frota:</label>
+                        <input type="text" id="filter" placeholder="">
+                    </div>
+
+                    <div class="font-size-tool">
+                        <img src="../static/images/font_uppercase_icon.png" alt="Uppercase Icon" id="uppercase-button">
+                        <img src="../static/images/font_lowercase_icon.png" alt="Lowercase Icon" id="lowercase-button">
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Rian Batista 2025</p>
+        <p>Versão 0.0.1</p>
+    </footer>
+
+    <script src="../static/script/editar_planilha.js"></script>
+</body>
+</html>

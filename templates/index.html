@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/tiete_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../static/style/style.css">
+    <title>CTO</title>
+</head>
+<body>
+    <header>
+        <img src="../static/images/tiete_logo.png" alt="Tiete Logo" class="tiete-logo">
+        <p class="texto-tiete-logo">CTO</p>
+        <div class="menu-button" id="menu-button">
+            <div id="line-1"></div>
+            <div id="line-2"></div>
+            <div id="line-3"></div>
+        </div>
+    </header>
+
+    <div id="resume-push" class="collapsed">
+        <table class="resume-table">
+            <thead class="resume-head">
+                <tr>
+                    <th class="resume-th">TOTAL</th>
+                    <th class="resume-th">FEITO</th>
+                    <th class="resume-th">RESTANTE</th>
+                    <th class="resume-th">RENDIMENTO</th>
+                </tr>
+            </thead>
+            <tbody class="resume-body">
+                <tr>
+                    <td class="resume-td">{{ total }}</td>
+                    <td class="resume-td">{{ ativo }}</td>
+                    <td class="resume-td">{{ restante }}</td>
+                    <td class="resume-td">{{ rendimento }}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="menu-box">
+        <div class="tools-box">
+            <form action="/importar_excel" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" accept=".xlsx,.xls" required hidden onchange="this.form.submit()">
+                <label for="file" class="tools-button">Importar Excel</label>
+            </form>
+            <form action="/editar" method="get">
+                <button type="submit" class="tools-button">Editar</button>
+            </form>
+            <form action="/baixar" method="get">
+                <button type="submit" class="tools-button">Gerar Excel</button>
+            </form>
+        </div>
+
+        <div class="filter-box">
+            <label for="filter">Buscar Frota:</label>
+            <input type="text" id="filter" placeholder="">
+        </div>
+
+        <div class="font-size-tool">
+            <img src="../static/images/font_uppercase_icon.png" alt="Uppercase Icon" id="uppercase-button">
+            <img src="../static/images/font_lowercase_icon.png" alt="Lowercase Icon" id="lowercase-button">
+        </div>
+    </div>
+    
+    <main>
+        <h1 class="titulo">Tabela de Frotas</h1>
+        <section>
+            <form action="/atualizar_status" method="post">
+                <div class="tabela-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">UND</th>
+                                <th onclick="sortTable(1)">FROTA</th>
+                                <th onclick="sortTable(2)">DESCRIÇÃO</th>
+                                <th onclick="sortTable(3)">ANO</th>
+                                <th onclick="sortTable(4)">CHASSIS</th>
+                                <th onclick="sortTable(5)">SERIE</th>
+                                <th onclick="sortTable(6)">PLACA</th>
+                                <th onclick="sortTable(7)">AGREGADO</th>
+                                <th onclick="sortTable(8)">TELEMETRIA</th>
+                                <th onclick="sortTable(9)">RASTREAMENTO</th>
+                                <th onclick="sortTable(10)">TRIMBLE</th>
+                                <th onclick="sortTable(11)">STATUS SALVO</th>
+                                <th onclick="sortTable(12)">STATUS NOVO</th>
+                                <th onclick="sortTable(13)">OBSERVAÇÃO</th>
+                                <th>+INFO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for frota in dados %}
+                            <tr>
+                                <td class="input-table" id="UNIDADE">{{ frota["UNIDADE"] }}</td>
+                                <td class="input-table" id="FROTA">{{ frota["FROTA"] }}</td>
+                                <td class="input-table" id="DESCRICAO">{{ frota["DESCRICAO"] }}</td>
+                                <td class="input-table" id="ANO">{{ frota["ANO"] }}</td>
+                                <td class="input-table" id="CHASSIS">{{ frota["CHASSIS"] }}</td>
+                                <td class="input-table" id="SERIE">{{ frota["SERIE"] }}</td>
+                                <td class="input-table" id="PLACA">{{ frota["PLACA"] }}</td>
+                                <td class="input-table" id="AGREGADO">{{ frota["AGREGADO"] }}</td>
+                                <td class="input-table" id="TELEMETRIA">{{ frota["TELEMETRIA"] }}</td>
+                                <td class="input-table" id="RASTREAMENTO">{{ frota["RASTREAMENTO"] }}</td>
+                                <td class="input-table" id="TRIMBLE">{{ frota["SENSOR FADIGA"] }}</td>
+                                <td class="input-table" id="STATUS_SALVO">{{ frota["STATUS"] }}</td>
+                                <td class="input-table" id="STATUS_NOVO">
+                                    <select class="select-table" name="FROTA_{{ frota['FROTA'] }}">
+                                        <option value="" {% if frota['STATUS'] == "" %}selected{% endif %}>Em branco</option>
+                                        <option value="Feito" {% if frota['STATUS'] == "Feito" %}selected{% endif %}>Feito</option>
+                                        <option value="Acidente" {% if frota['STATUS'] == "Acidente" %}selected{% endif %}>Acidente</option>
+                                        <option value="Vendido" {% if frota['STATUS'] == "Vendido" %}selected{% endif %}>Vendido</option>
+                                        <option value="Frota Adesiva Errada" {% if frota['STATUS'] == "Frota Adesiva Errada" %}selected{% endif %}>Frota Adesiva Errada</option>
+                                        <option value="Sem Identificação" {% if frota['STATUS'] == "Sem Identificação" %}selected{% endif %}>Sem Identificação</option>
+                                        <option value="Manutenção Externa" {% if frota['STATUS'] == "Manutenção Externa" %}selected{% endif %}>Manutenção Externa</option>
+                                        <option value="Não Encontrado" {% if frota['STATUS'] == "Não Encontrado" %}selected{% endif %}>Não Encontrado</option>
+                                        <option value="Não Estava Na Base" {% if frota['STATUS'] == "Não Estava Na Base" %}selected{% endif %}></option>
+                                        <option value="Filial Errada" {% if frota['STATUS'] == "Filial Errada" %}selected{% endif %}>Filial Errada</option>
+                                        <option value="Novo" {% if frota['STATUS'] == "Novo" %}selected{% endif %}>Novo</option>
+                                        <option value="Sucata" {% if frota['STATUS'] == "Sucata" %}selected{% endif %}>Sucata</option>
+                                        <option value="Obs." {% if frota['STATUS'] == "Obs." %}selected{% endif %}>Obs.</option>
+                                    </select>
+                                </td>
+                                <td class="input-table" id="OBSERVACAO">{{ frota["OBSERVAÇÃO"] }}</td>
+                                <td class="input-table" id="INFO"><a id="info" href="/detalhes/{{ frota['FROTA'] }}">+</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="tools-button" id="salvar">Salvar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Rian Batista 2025</p>
+        <p>Versão 0.0.1</p>
+    </footer>
+
+    <script src="../static/script/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/tiete_logo.png" type="image/x-icon">
+    <title>CTO - Frota</title>
+    <link rel="stylesheet" href="../static/style/info_frota.css">
+</head>
+<body>
+    <header>
+        <img src="../static/images/tiete_logo.png" alt="Tiete Logo" class="tiete-logo">
+        <p class="texto-tiete-logo">CTO</p>
+        <div class="menu-button" id="menu-button"></div>
+    </header>
+
+    <div id="menu-box"></div>
+
+    <main>
+        <section>
+            <div class="ficha-card">
+
+                <h1>{{ frota["FROTA"] }} - {{ frota["DESCRICAO"] }}</h1>
+
+                <img src="{{ frota['foto_path'] }}" alt="Imagem da frota" class="frota-imagem">
+
+                <form action="/upload_foto/{{ frota['FROTA'] }}" method="post" enctype="multipart/form-data">
+                    <input 
+                        id="foto" 
+                        type="file" 
+                        name="foto" 
+                        accept="image/*" 
+                        required 
+                        hidden 
+                        onchange="this.form.submit()"> <!-- dispara auto -->
+                    <label for="foto" class="submit-photo">Selecionar Foto</label>
+                </form>
+
+
+                <div class="ficha-info">
+                    <p><strong>Unidade:</strong> {{ frota["UNIDADE"] }}</p>
+                    <p><strong>Frota:</strong> {{ frota["FROTA"] }}</p>
+                    <p><strong>Descrição:</strong> {{ frota["DESCRICAO"] }}</p>
+                    <p><strong>Ano:</strong> {{ frota["ANO"] }}</p>
+                    <p><strong>Chassis:</strong> {{ frota["CHASSIS"] }}</p>
+                    <p><strong>Série:</strong> {{ frota["SERIE"] }}</p>
+                    <p><strong>Placa:</strong> {{ frota["PLACA"] }}</p>
+                    <p><strong>Agregado:</strong> {{ frota["AGREGADO"] }}</p>
+                    <p><strong>Telemetria:</strong> {{ frota["TELEMETRIA"] }}</p>
+                    <p><strong>Rastreamento:</strong> {{ frota["RASTREAMENTO"] }}</p>
+                    <p><strong>Sensor de Fadiga:</strong> {{ frota["SENSOR FADIGA"] }}</p>
+                    <p><strong>Observação:</strong> {{ frota["OBSERVAÇÃO"] }}</p>
+                </div>
+            </div>
+
+            <form action="/" method="get">
+                <button type="submit" class="tools-button">Voltar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Rian Batista 2025</p>
+        <p>Versão 0.0.1</p>
+    </footer>
+
+    <script src="../static/script/info_frota.js"></script>
+</body>
+</html>
