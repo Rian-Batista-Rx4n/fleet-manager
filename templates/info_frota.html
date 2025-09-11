@@ -45,11 +45,38 @@
                     <p><strong>Chassis:</strong> {{ frota["CHASSIS"] }}</p>
                     <p><strong>Série:</strong> {{ frota["SERIE"] }}</p>
                     <p><strong>Placa:</strong> {{ frota["PLACA"] }}</p>
-                    <p><strong>Agregado:</strong> {{ frota["AGREGADO"] }}</p>
                     <p><strong>Telemetria:</strong> {{ frota["TELEMETRIA"] }}</p>
                     <p><strong>Rastreamento:</strong> {{ frota["RASTREAMENTO"] }}</p>
                     <p><strong>Sensor de Fadiga:</strong> {{ frota["SENSOR FADIGA"] }}</p>
                     <p><strong>Observação:</strong> {{ frota["OBSERVAÇÃO"] }}</p>
+                    <p><strong>Agregado:</strong> {{ frota["AGREGADO"] }}</p>
+
+                    <div class="agregado-section" data-frota="{{ frota['FROTA'] }}">
+                        <h2>Fotos de Agregados</h2>
+
+                        <!-- Formulário de upload -->
+                        <form action="/upload_agregado/{{ frota['FROTA'] }}" method="post" enctype="multipart/form-data">
+                            <input id="foto_agregado" type="file" name="foto_agregado" accept="image/*" required hidden onchange="this.form.submit()">
+                            <label for="foto_agregado" class="submit-photo">Selecionar Foto</label>
+                        </form>
+
+                        <!-- Galeria -->
+                        <div class="agregado-gallery">
+                            {% for foto in fotos_agregado %}
+                            <img src="{{ foto }}" class="agregado-img {% if not loop.first %}hidden{% endif %}" data-index="{{ loop.index0 }}">
+                            {% endfor %}
+                        </div>
+
+                        <!-- Controles -->
+                        <div class="agregado-controls">
+                            <button type="button" id="prev-agregado" class="tools-button">◀</button>
+                            <button type="button" id="next-agregado" class="tools-button">▶</button>
+                            <form id="delete-form" action="" method="post" style="display:inline;">
+                                <button type="submit" class="tools-button" style="background:red;">🗑️</button>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -61,7 +88,7 @@
 
     <footer>
         <p>&copy; Rian Batista 2025</p>
-        <p>Versão 0.0.1</p>
+        <p>Versão 0.1.0</p>
     </footer>
 
     <script src="../static/script/info_frota.js"></script>

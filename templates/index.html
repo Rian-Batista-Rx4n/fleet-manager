@@ -114,14 +114,16 @@
                                         <option value="Sem Identificação" {% if frota['STATUS'] == "Sem Identificação" %}selected{% endif %}>Sem Identificação</option>
                                         <option value="Manutenção Externa" {% if frota['STATUS'] == "Manutenção Externa" %}selected{% endif %}>Manutenção Externa</option>
                                         <option value="Não Encontrado" {% if frota['STATUS'] == "Não Encontrado" %}selected{% endif %}>Não Encontrado</option>
-                                        <option value="Não Estava Na Base" {% if frota['STATUS'] == "Não Estava Na Base" %}selected{% endif %}></option>
+                                        <option value="Não Estava Na Base Anterior" {% if frota['STATUS'] == "Não Estava Na Base Anterior" %}selected{% endif %}>Não Estava na Base Anterior</option>
                                         <option value="Filial Errada" {% if frota['STATUS'] == "Filial Errada" %}selected{% endif %}>Filial Errada</option>
                                         <option value="Novo" {% if frota['STATUS'] == "Novo" %}selected{% endif %}>Novo</option>
                                         <option value="Sucata" {% if frota['STATUS'] == "Sucata" %}selected{% endif %}>Sucata</option>
                                         <option value="Obs." {% if frota['STATUS'] == "Obs." %}selected{% endif %}>Obs.</option>
                                     </select>
                                 </td>
-                                <td class="input-table" id="OBSERVACAO">{{ frota["OBSERVAÇÃO"] }}</td>
+                                <td class="input-table" id="OBSERVACAO">
+                                    <input class="input-table" type="text" name="OBS_{{ frota['FROTA'] }}" value="{{ frota['OBSERVAÇÃO'] }}">
+                                </td>
                                 <td class="input-table" id="INFO"><a id="info" href="/detalhes/{{ frota['FROTA'] }}">+</a></td>
                             </tr>
                             {% endfor %}
@@ -135,7 +137,7 @@
 
     <footer>
         <p>&copy; Rian Batista 2025</p>
-        <p>Versão 0.0.1</p>
+        <p>Versão 0.1.0</p>
     </footer>
 
     <script src="../static/script/script.js"></script>
