@@ -1,6 +1,6 @@
 # 🚍 Fleet Manager
 
-**Version:** 0.1.0
+**Version:** 0.2.1
 A lightweight fleet management system built with **Flask** and **Pandas**, designed for importing, editing, and monitoring vehicle spreadsheets (Excel files).  
 Originally developed for CTO department operations, but can be adapted to other organizations.  
 
@@ -37,16 +37,16 @@ Originally developed for CTO department operations, but can be adapted to other 
 
 ---
 
-## ⚡ Installation in (Example using Termux)
+## ⚡ Installation in (Debian)
 
 ### 1. Update and Upgrade packages
 ```
-pkg update && pkg upgrade
+apt update && pkg upgrade
 ```
 ### 2. Instaling Resources
 ```
-pkg install python3
-pkg install git
+apt install python3
+apt install git
 ```
 ### 3. Cloning repository
 ```
@@ -55,7 +55,7 @@ cd fleet-manager
 ```
 ### 4. Install dependencies
 ```
-pip install --break-system-packages -r requirements.txt
+pip install -r requirements.txt
 ```
 ### 5. Run the application
 ```

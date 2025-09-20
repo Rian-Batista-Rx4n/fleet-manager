@@ -1,21 +1,51 @@
-const add_row_button = document.getElementById("add-row")
-add_row_button.addEventListener("click", add_row_trigger)
+// ======== ADICIONAR LINHA ========
+const add_row_button = document.getElementById("add-row");
+add_row_button.addEventListener("click", add_row_trigger);
 
-function add_row_trigger(){
-    let add_row = document.getElementById("row")
-    add_row.innerHTML += `<tr>
-        <td><input type="text" name="id" value=""></td>
-        <td><input type="text" name="nome" value=""></td>
-        <td><input type="text" name="tipo" value=""></td>
-        <td><input type="text" name="descricao" value=""></td>
-        <td><input type="text" name="ultima_modificacao" value=""></td>
-        <td><input type="text" name="atualizado" value=""></td>
+function add_row_trigger() {
+    const tbody = document.getElementById("row");
+
+    // cria um ID temporário para cada nova linha (pode ajustar depois)
+    const temp_id = Date.now();
+
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+        <td><input class="input-table" type="text" name="UNIDADE" value=""></td>
+        <td><input class="input-table" type="text" name="FROTA" value=""></td>
+        <td><input class="input-table" type="text" name="DESCRICAO" value=""></td>
+        <td><input class="input-table" type="text" name="ANO" value=""></td>
+        <td><input class="input-table" type="text" name="CHASSIS" value=""></td>
+        <td><input class="input-table" type="text" name="SERIE" value=""></td>
+        <td><input class="input-table" type="text" name="PLACA" value=""></td>
+        <td><input class="input-table" type="text" name="AGREGADO" value=""></td>
+        <td><input class="input-table" type="text" name="TELEMETRIA" value=""></td>
+        <td><input class="input-table" type="text" name="RASTREAMENTO" value=""></td>
+        <td><input class="input-table" type="text" name="SENSOR FADIGA" value=""></td>
+        <td>
+            <select name="STATUS">
+                <option value="" selected>Em branco</option>
+                <option value="OK">OK</option>
+                <option value="Acidente">Acidente</option>
+                <option value="Vendido">Vendido</option>
+                <option value="Frota Adesiva Errada">Frota Adesiva Errada</option>
+                <option value="Sem Identificação">Sem Identificação</option>
+                <option value="Manutenção Externa">Manutenção Externa</option>
+                <option value="Não Encontrado">Não Encontrado</option>
+                <option value="Não Estava Na Base">Não Estava Na Base</option>
+                <option value="Filial Errada">Filial Errada</option>
+                <option value="Novo">Novo</option>
+                <option value="Sucata">Sucata</option>
+                <option value="Obs.">Obs.</option>
+            </select>
+        </td>
+        <td><input class="input-table" type="text" name="OBSERVAÇÃO" value=""></td>
         <td class="delete-row">X</td>
-    </tr>
-    `
+    `;
+    tbody.appendChild(newRow);
 }
 
-document.getElementById("row").addEventListener("click", function(e) {
+// ======== DELETAR LINHA ========
+document.getElementById("row").addEventListener("click", function (e) {
     if (e.target.classList.contains("delete-row")) {
         e.target.closest("tr").remove();
     }

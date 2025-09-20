@@ -129,17 +129,17 @@ def atualizar_status():
 def editar():
     if request.method == "POST":
         dados_editados = request.form.to_dict(flat=False)
+        try:
+            with open("data/data.json", "r", encoding="utf-8") as f:
+                dados_originais = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            dados_originais = []
 
-        with open("data/data.json", "r", encoding="utf-8") as f:
-            dados_originais = json.load(f)
-
-        num_registros = len(dados_editados["FROTA"])
+        num_registros = len(dados_editados.get("FROTA", []))
         dados = []
         for i in range(num_registros):
-
             id_atual = dados_editados["FROTA"][i]
             original = next((d for d in dados_originais if d["FROTA"] == id_atual), {})
-
             item = {
                 "UNIDADE": dados_editados["UNIDADE"][i],
                 "FROTA": dados_editados["FROTA"][i],
@@ -162,8 +162,12 @@ def editar():
 
         return redirect(url_for("home"))
 
-    with open("data/data.json", "r", encoding="utf-8") as f:
-        dados = json.load(f)
+    # 🔹 Aqui também tratar JSON vazio
+    try:
+        with open("data/data.json", "r", encoding="utf-8") as f:
+            dados = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        dados = []
 
     return render_template("editar_planilha.html", dados=dados)
 
