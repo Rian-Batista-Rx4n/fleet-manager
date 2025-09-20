@@ -58,20 +58,20 @@
                                     <td><input class="input-table" id="RASTREAMENTO" type="text" name="RASTREAMENTO" value="{{ frota['RASTREAMENTO'] }}"></td>
                                     <td><input class="input-table" id="SENSOR_FADIGA" type="text" name="SENSOR FADIGA" value="{{ frota['SENSOR FADIGA'] }}"></td>
                                     <td>
-                                        <select name="FOTO">
-                                            <option value="" {% if frota['FOTO'] == "" %}selected{% endif %}>Em branco</option>
-                                            <option value="OK" {% if frota['FOTO'] == "OK" %}selected{% endif %}>OK</option>
-                                            <option value="Acidente" {% if frota['FOTO'] == "Acidente" %}selected{% endif %}>Acidente</option>
-                                            <option value="Vendido" {% if frota['FOTO'] == "Vendido" %}selected{% endif %}>Vendido</option>
-                                            <option value="Frota Adesiva Errada" {% if frota['FOTO'] == "Frota Adesiva Errada" %}selected{% endif %}>Frota Adesiva Errada</option>
-                                            <option value="Sem Identificação" {% if frota['FOTO'] == "Sem Identificação" %}selected{% endif %}>Sem Identificação</option>
-                                            <option value="Manutenção Externa" {% if frota['FOTO'] == "Manutenção Externa" %}selected{% endif %}>Manutenção Externa</option>
-                                            <option value="Não Encontrado" {% if frota['FOTO'] == "Não Encontrado" %}selected{% endif %}>Não Encontrado</option>
-                                            <option value="Não Estava Na Base" {% if frota['FOTO'] == "Não Estava Na Base" %}selected{% endif %}>Não Estava Na Base</option>
-                                            <option value="Filial Errada" {% if frota['FOTO'] == "Filial Errada" %}selected{% endif %}>Filial Errada</option>
-                                            <option value="Novo" {% if frota['FOTO'] == "Novo" %}selected{% endif %}>Novo</option>
-                                            <option value="Sucata" {% if frota['FOTO'] == "Sucata" %}selected{% endif %}>Sucata</option>
-                                            <option value="Obs." {% if frota['FOTO'] == "Obs." %}selected{% endif %}>Obs.</option>
+                                        <select name="STATUS">
+                                            <option value="" {% if frota['STATUS'] == "" %}selected{% endif %}>Em branco</option>
+                                            <option value="OK" {% if frota['STATUS'] == "OK" %}selected{% endif %}>OK</option>
+                                            <option value="Acidente" {% if frota['STATUS'] == "Acidente" %}selected{% endif %}>Acidente</option>
+                                            <option value="Vendido" {% if frota['STATUS'] == "Vendido" %}selected{% endif %}>Vendido</option>
+                                            <option value="Frota Adesiva Errada" {% if frota['STATUS'] == "Frota Adesiva Errada" %}selected{% endif %}>Frota Adesiva Errada</option>
+                                            <option value="Sem Identificação" {% if frota['STATUS'] == "Sem Identificação" %}selected{% endif %}>Sem Identificação</option>
+                                            <option value="Manutenção Externa" {% if frota['STATUS'] == "Manutenção Externa" %}selected{% endif %}>Manutenção Externa</option>
+                                            <option value="Não Encontrado" {% if frota['STATUS'] == "Não Encontrado" %}selected{% endif %}>Não Encontrado</option>
+                                            <option value="Não Estava Na Base" {% if frota['STATUS'] == "Não Estava Na Base" %}selected{% endif %}>Não Estava Na Base</option>
+                                            <option value="Filial Errada" {% if frota['STATUS'] == "Filial Errada" %}selected{% endif %}>Filial Errada</option>
+                                            <option value="Novo" {% if frota['STATUS'] == "Novo" %}selected{% endif %}>Novo</option>
+                                            <option value="Sucata" {% if frota['STATUS'] == "Sucata" %}selected{% endif %}>Sucata</option>
+                                            <option value="Obs." {% if frota['STATUS'] == "Obs." %}selected{% endif %}>Obs.</option>
                                         </select>
                                     </td>
                                     <td><input class="input-table" id="OBSERVACAO" type="text" name="OBSERVAÇÃO" value="{{ frota['OBSERVAÇÃO'] }}"></td>

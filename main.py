@@ -99,6 +99,12 @@ def atualizar_status():
                 if str(d["FROTA"]) == frota_id:
                     d["OBSERVAÇÃO"] = value
 
+        elif key.startswith("AGREAGADO_"):
+            frota_id = key.replace("AGREGADO_", "")
+            for d in dados:
+                if str(d["FROTA"]) == frota_id:
+                    d["AGREGADO"] = value
+
     with open("data/data.json", "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=4, ensure_ascii=False)
 

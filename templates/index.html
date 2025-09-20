@@ -99,7 +99,9 @@
                                 <td class="input-table" id="CHASSIS">{{ frota["CHASSIS"] }}</td>
                                 <td class="input-table" id="SERIE">{{ frota["SERIE"] }}</td>
                                 <td class="input-table" id="PLACA">{{ frota["PLACA"] }}</td>
-                                <td class="input-table" id="AGREGADO">{{ frota["AGREGADO"] }}</td>
+                                <td class="input-table" id="AGREGADO">
+                                    <input class="input-table" type="text" name="AGREGADO_{{ frota['FROTA'] }}" value="{{ frota['AGREGADO'] }}">
+                                </td>
                                 <td class="input-table" id="TELEMETRIA">{{ frota["TELEMETRIA"] }}</td>
                                 <td class="input-table" id="RASTREAMENTO">{{ frota["RASTREAMENTO"] }}</td>
                                 <td class="input-table" id="TRIMBLE">{{ frota["SENSOR FADIGA"] }}</td>
