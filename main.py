@@ -33,6 +33,16 @@ def home():
 
     total = len(dados)
     ativo = sum(1 for d in dados if d.get("STATUS", "").strip() != "")
+    acidente = sum(1 for d in dados if d.get("STATUS", "").strip() == "Acidente")
+    vendido = sum(1 for d in dados if d.get("STATUS", "").strip() == "Vendido")
+    adesivada = sum(1 for d in dados if d.get("STATUS", "").strip() == "Frota Adesivada Errada")
+    identificacao = sum(1 for d in dados if d.get("STATUS", "").strip() == "Sem Identificação")
+    manutencao = sum(1 for d in dados if d.get("STATUS", "").strip() == "Manutenção Externa")
+    encontrado = sum(1 for d in dados if d.get("STATUS", "").strip() == "Não Encontrado")
+    base = sum(1 for d in dados if d.get("STATUS", "").strip() == "Não Estava na Base Anterior")
+    filial = sum(1 for d in dados if d.get("STATUS", "").strip() == "Filial Errada")
+    novo = sum(1 for d in dados if d.get("STATUS", "").strip() == "Novo")
+    sucata = sum(1 for d in dados if d.get("STATUS", "").strip() == "Sucata")
     restante = total - ativo
     rendimento = round((ativo / total * 100), 2) if total > 0 else 0
 
@@ -41,7 +51,17 @@ def home():
                            total=total,
                            ativo=ativo,
                            restante=restante,
-                           rendimento=rendimento)
+                           rendimento=rendimento,
+                           frota_tot_acidente=acidente,
+                           frota_tot_vendido=vendido,
+                           frota_tot_adesivada=adesivada,
+                           frota_tot_identificacao=identificacao,
+                           frota_tot_manutencao=manutencao,
+                           frota_tot_encontrado=encontrado,
+                           frota_tot_base=base,
+                           frota_tot_filial=filial,
+                           frota_tot_novo=novo,
+                           frota_tot_sucata=sucata)
 
 # =====--- IMPORT EXCEL ---===== 
 @app.route("/importar_excel", methods=["POST"])
@@ -53,19 +73,14 @@ def importar_excel():
 
     df = pd.read_excel(file)
 
-    # 🔹 Renomeia coluna FOTO para STATUS (caso venha do Excel)
     if "FOTO" in df.columns:
         df.rename(columns={"FOTO": "STATUS"}, inplace=True)
 
-
-    # Converte datas para string
     for col in df.select_dtypes(include=["datetime64[ns]", "datetime64"]).columns:
         df[col] = df[col].dt.strftime("%d/%m/%Y")
 
-    # 🔹 Substitui NaN, None ou float('nan') por string vazia
     df = df.fillna("")
 
-    # 🔹 Converte tudo para string e remove "nan" literais que vieram do Excel
     df = df.astype(str).replace("nan", "")
 
     dados = df.to_dict(orient="records")
@@ -84,8 +99,6 @@ def atualizar_status():
     except (FileNotFoundError, json.JSONDecodeError):
         dados = []
 
-    # request.form chega assim:
-    # {"FROTA_72": "Novo", "OBS_72": "Precisa revisão", ...}
     for key, value in request.form.items():
         if key.startswith("FROTA_"):
             frota_id = key.replace("FROTA_", "")
@@ -185,7 +198,6 @@ def detalhes(id):
     if not frota:
         abort(404, description="Frota não encontrada")
 
-    # foto principal da frota
     foto_path = None
     for ext in ["jpg", "jpeg", "png", "gif"]:
         tentativa = os.path.join(app.config["UPLOAD_FOLDER"], f"{id}.{ext}")
@@ -196,13 +208,12 @@ def detalhes(id):
         foto_path = url_for("static", filename="images/sem_foto.png")
     frota["foto_path"] = foto_path
 
-    # listar fotos de agregados
     fotos_agregado = []
     folder = app.config["UPLOAD_FOLDER"]
     for f in os.listdir(folder):
         if f.startswith(f"{id}-") and f.lower().endswith(("jpg","jpeg","png","gif")):
             fotos_agregado.append(url_for("static", filename=f"photos/{f}"))
-    fotos_agregado.sort()  # garante ordem 1,2,3
+    fotos_agregado.sort()
 
 
     return render_template("info_frota.html", frota=frota, fotos_agregado=fotos_agregado)
@@ -218,14 +229,11 @@ def upload_agregado(id):
     folder = app.config["UPLOAD_FOLDER"]
     os.makedirs(folder, exist_ok=True)
 
-    # contar quantas fotos de agregado já existem
     existentes = [f for f in os.listdir(folder) if f.startswith(f"{id}-") and f.lower().endswith(("jpg","jpeg","png","gif"))]
     existentes.sort()
 
-    # definir número do agregado automaticamente
     next_num = len(existentes) + 1
 
-    # manter extensão original
     ext = file.filename.rsplit(".", 1)[1].lower()
     filename = f"{id}-{next_num}.{ext}"
     caminho = os.path.join(folder, filename)
@@ -263,7 +271,6 @@ def upload_foto(id):
 def delete_agregado(frota_id, index):
     folder = app.config["UPLOAD_FOLDER"]
 
-    # lista fotos da frota
     fotos = sorted([f for f in os.listdir(folder) if f.startswith(f"{frota_id}-") and f.lower().endswith(("jpg","jpeg","png","gif"))])
     
     if 0 <= index < len(fotos):
@@ -277,4 +284,4 @@ def delete_agregado(frota_id, index):
 
 # =====--- FIN ---=====
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0', port=5050)
+    app.run(debug=True, host='0.0.0.0', port=5050)

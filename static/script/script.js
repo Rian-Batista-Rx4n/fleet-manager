@@ -156,14 +156,21 @@ filterInput.addEventListener("input", debounce(function () {
 
 // =====--- RESUME-PUSH ---=====
 const resumePush = document.getElementById("resume-push");
+let resume_text = document.querySelectorAll(".resume-text")
 
 resumePush.addEventListener("click", () => {
     if (resumePush.classList.contains("collapsed")) {
         resumePush.classList.remove("collapsed");
-        resumePush.style.height = "90px"; // altura expandida
+        resumePush.style.height = "316px";
+        resume_text.forEach(texto => {
+            texto.style.fontSize = `15px`
+        })
     } else {
         resumePush.classList.add("collapsed");
-        resumePush.style.height = "28px";  // volta pro tamanho da aba
+        resumePush.style.height = "28px";
+        resume_text.forEach(texto => {
+            texto.style.fontSize = `0px`
+        })
     }
 });
 
