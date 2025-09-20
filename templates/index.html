@@ -37,6 +37,18 @@
                 </tr>
             </tbody>
         </table>
+        <div class="resumu-texts">
+            <p class="resume-text">Acidente: <span class="resumo-valor">{{ frota_tot_acidente }}</span></p>
+            <p class="resume-text">Vendido: <span class="resumo-valor">{{ frota_tot_vendido }}</span></p>
+            <p class="resume-text">Adesivada Errada: <span class="resumo-valor">{{ frota_tot_adesivada }}</span></p>
+            <p class="resume-text">Sem Identificação: <span class="resumo-valor">{{ frota_tot_identificacao }}</span></p>
+            <p class="resume-text">Manutenção: <span class="resumo-valor">{{ frota_tot_manutencao }}</span></p>
+            <p class="resume-text">Não Encontrado: <span class="resumo-valor">{{ frota_tot_encontrado }}</span></p>
+            <p class="resume-text">Não Estava...: <span class="resumo-valor">{{ frota_tot_base }}</span></p>
+            <p class="resume-text">Filial Errada: <span class="resumo-valor">{{ frota_tot_filial }}</span></p>
+            <p class="resume-text">Novo: <span class="resumo-valor">{{ frota_tot_novo }}</span></p>
+            <p class="resume-text">Sucata: <span class="resumo-valor">{{ frota_tot_sucata }}</span></p>
+        </div>
     </div>
 
     <div id="menu-box">
@@ -72,21 +84,21 @@
                     <table>
                         <thead>
                             <tr>
-                                <th onclick="sortTable(0)">UND</th>
-                                <th onclick="sortTable(1)">FROTA</th>
-                                <th onclick="sortTable(2)">DESCRIÇÃO</th>
-                                <th onclick="sortTable(3)">ANO</th>
-                                <th onclick="sortTable(4)">CHASSIS</th>
-                                <th onclick="sortTable(5)">SERIE</th>
-                                <th onclick="sortTable(6)">PLACA</th>
-                                <th onclick="sortTable(7)">AGREGADO</th>
-                                <th onclick="sortTable(8)">TELEMETRIA</th>
-                                <th onclick="sortTable(9)">RASTREAMENTO</th>
-                                <th onclick="sortTable(10)">TRIMBLE</th>
-                                <th onclick="sortTable(11)">STATUS SALVO</th>
-                                <th onclick="sortTable(12)">STATUS NOVO</th>
-                                <th onclick="sortTable(13)">OBSERVAÇÃO</th>
-                                <th>+INFO</th>
+                                <th onclick="sortTable(0)" class="th-table">UND</th>
+                                <th onclick="sortTable(1)" class="th-table">FROTA</th>
+                                <th onclick="sortTable(2)" class="th-table">DESCRIÇÃO</th>
+                                <th onclick="sortTable(3)" class="th-table">ANO</th>
+                                <th onclick="sortTable(4)" class="th-table">CHASSIS</th>
+                                <th onclick="sortTable(5)" class="th-table">SERIE</th>
+                                <th onclick="sortTable(6)" class="th-table">PLACA</th>
+                                <th onclick="sortTable(7)" class="th-table">AGREGADO</th>
+                                <th onclick="sortTable(8)" class="th-table">TELEMETRIA</th>
+                                <th onclick="sortTable(9)" class="th-table">RASTREAMENTO</th>
+                                <th onclick="sortTable(10)" class="th-table">TRIMBLE</th>
+                                <th onclick="sortTable(11)" class="th-table">STATUS SALVO</th>
+                                <th onclick="sortTable(12)" class="th-table">STATUS NOVO</th>
+                                <th onclick="sortTable(13)" class="th-table">OBSERVAÇÃO</th>
+                                <th class="th-table">+INFO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -139,7 +151,7 @@
 
     <footer>
         <p>&copy; Rian Batista 2025</p>
-        <p>Versão 0.1.0</p>
+        <p>Versão 0.2.0</p>
     </footer>
 
     <script src="../static/script/script.js"></script>

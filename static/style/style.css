@@ -77,7 +77,7 @@ header {
     font-size: 0px;
     box-shadow: 24px 24px 24px rgba(0, 0, 0, 0.25);
     transition: ease 0.2s;
-    z-index: 5;
+    z-index: 99;
 }
 
 .titulo {
@@ -119,63 +119,71 @@ header {
 
 .tabela-box {
     width: 90%;
-    padding: 1em;
+    padding: 0em 1em 1em 1em;
     border: solid 2px var(--cor-secundaria);
     border-radius: 8px;
     margin: auto;
-    overflow-x: auto;
+    overflow: auto;
+    max-height: calc(100vh - 200px);
 }
 
 table {
-    text-align: center;
-    border: solid 1px var(--cor-secundaria);
-    border-radius: 4px;
-    margin: 4px auto;
-    font-size: 18px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-.input-table {
-    background: transparent;   /* fundo transparente */
-    width: auto;               /* ocupa apenas o necessário */
-    text-align: center;        /* mantém alinhado como texto */
-    padding: 1em;                /* remove espaçamento interno */
-    margin: 0;                 /* remove margem */
-    font: inherit;             /* herda fonte da tabela */
-    color: inherit;            /* usa mesma cor do texto */
-    border: solid 1px var(--cor-secundaria);
-}
-
-.input-table:focus {
-    border: 1px solid var(--cor-terceira);
-    background: #eef7ff;
-}
-
-.select-table {
-    background: transparent;   /* fundo transparente */
-    width: auto;               /* ocupa apenas o necessário */
-    text-align: center;        /* mantém alinhado como texto */
-    padding: 0.8em;                /* remove espaçamento interno */
-    margin: 0;                 /* remove margem */
-    font: inherit;             /* herda fonte da tabela */
-    color: inherit;            /* usa mesma cor do texto */
-    border: solid 1px var(--cor-secundaria);
-    font-weight: bold;
-}
-
-th {               
-    background: #57caf6;         
-    border: solid 1px var(--cor-secundaria);
+th, td {
     padding: 0.5em;
-    cursor: pointer;
-    z-index: 5;                  
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    border: solid 1px var(--cor-secundaria);
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: #57caf6;
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
 
-th:hover {
-    background: var(--cor-setima);
+
+thead th:first-child {
+    z-index: 6;
 }
-tr:nth-child(even) {
+
+tbody tr:nth-child(even) {
     background: rgba(0, 0, 0, 0.100);
+}
+
+tbody tr:nth-child(even) td:first-child {
+    background: rgba(0,0,0,0.100);
+}
+
+.input-table {
+    background: transparent;
+    width: auto;
+    text-align: center;
+    padding: 1em;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    border: solid 1px var(--cor-secundaria);
+}
+
+.select-table {
+    background: transparent;
+    width: auto;
+    text-align: center;
+    padding: 0.8em;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    border: solid 1px var(--cor-secundaria);
+    font-weight: bold;
 }
 
 footer {
@@ -238,19 +246,20 @@ footer {
     text-align: center;
     cursor: pointer;
 }
+
 #resume-push {
     position: fixed;
-    z-index: 2;
+    z-index: 8;
     width: 448px;
-    height: 28px; /* só a "aba" visível */
+    height: 28px;
     background: var(--cor-terceira);
     border: solid 1px black;
     border-radius: 0 0 12px 12px;
     top: 64px;
     right: 64px;
-    overflow: hidden;         /* 🔹 esconde conteúdo */
+    overflow: hidden;
     transition: height 0.3s ease;
-    cursor: pointer;          /* mostra que é clicável */
+    cursor: pointer;
 }
 
 .resume-table {
@@ -258,18 +267,13 @@ footer {
     transition: ease 0.3s;
 }
 
-/* tabela escondida no estado inicial */
 #resume-push.collapsed .resume-table {
     display: none;
 }
 
 @media (max-width: 800px) {
-    table {
-        font-size: 14px;
-    }
-    th, td {
-        padding: 0.5em;
-    }
+    table { min-width: 900px; font-size: 14px; }
+    th, td { padding: 0.4em; }
     #resume-push {
         position: fixed;
         width: 358px;
@@ -277,4 +281,23 @@ footer {
         top: 64px;
         text-align: center;
     }
+}
+
+.resumu-texts {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 5px; 
+    margin: auto;
+}
+.resumu-texts p {
+    color: white;
+}
+
+.resumo-valor {
+    color: #fff200; /* cor diferente para os números */
+    font-weight: bold;
+}
+
+.resume-text {
+    font-size: 0px;
 }
