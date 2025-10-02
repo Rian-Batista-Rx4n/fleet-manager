@@ -39,7 +39,7 @@ def home():
     identificacao = sum(1 for d in dados if d.get("STATUS", "").strip() == "Sem Identificação")
     manutencao = sum(1 for d in dados if d.get("STATUS", "").strip() == "Manutenção Externa")
     encontrado = sum(1 for d in dados if d.get("STATUS", "").strip() == "Não Encontrado")
-    base = sum(1 for d in dados if d.get("STATUS", "").strip() == "Não Estava na Base Anterior")
+    base = sum(1 for d in dados if d.get("STATUS", "").strip() == "Não Estava Na Base Anterior")
     filial = sum(1 for d in dados if d.get("STATUS", "").strip() == "Filial Errada")
     novo = sum(1 for d in dados if d.get("STATUS", "").strip() == "Novo")
     sucata = sum(1 for d in dados if d.get("STATUS", "").strip() == "Sucata")

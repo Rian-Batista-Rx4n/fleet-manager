@@ -42,12 +42,16 @@
             <p class="resume-text">Vendido: <span class="resumo-valor">{{ frota_tot_vendido }}</span></p>
             <p class="resume-text">Adesivada Errada: <span class="resumo-valor">{{ frota_tot_adesivada }}</span></p>
             <p class="resume-text">Sem Identificação: <span class="resumo-valor">{{ frota_tot_identificacao }}</span></p>
-            <p class="resume-text">Manutenção: <span class="resumo-valor">{{ frota_tot_manutencao }}</span></p>
+            <p class="resume-text">Manutenção Ext.: <span class="resumo-valor">{{ frota_tot_manutencao }}</span></p>
             <p class="resume-text">Não Encontrado: <span class="resumo-valor">{{ frota_tot_encontrado }}</span></p>
             <p class="resume-text">Não Estava...: <span class="resumo-valor">{{ frota_tot_base }}</span></p>
             <p class="resume-text">Filial Errada: <span class="resumo-valor">{{ frota_tot_filial }}</span></p>
             <p class="resume-text">Novo: <span class="resumo-valor">{{ frota_tot_novo }}</span></p>
             <p class="resume-text">Sucata: <span class="resumo-valor">{{ frota_tot_sucata }}</span></p>
+        </div>
+        <div id="arrow-box">
+            <div id="arrows1" class="arrow">▼▼</div>
+            <div id="arrows2" class="arrow">▼▼</div>
         </div>
     </div>
 
@@ -81,9 +85,9 @@
         <section>
             <form action="/atualizar_status" method="post">
                 <div class="tabela-box">
-                    <table>
-                        <thead>
-                            <tr>
+                    <table class="table-table">
+                        <thead class="thead-table">
+                            <tr class="tr-table">
                                 <th onclick="sortTable(0)" class="th-table">UND</th>
                                 <th onclick="sortTable(1)" class="th-table">FROTA</th>
                                 <th onclick="sortTable(2)" class="th-table">DESCRIÇÃO</th>
@@ -101,9 +105,9 @@
                                 <th class="th-table">+INFO</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tbody-table">
                             {% for frota in dados %}
-                            <tr>
+                            <tr class="tr-table">
                                 <td class="input-table" id="UNIDADE">{{ frota["UNIDADE"] }}</td>
                                 <td class="input-table" id="FROTA">{{ frota["FROTA"] }}</td>
                                 <td class="input-table" id="DESCRICAO">{{ frota["DESCRICAO"] }}</td>
@@ -124,7 +128,7 @@
                                         <option value="Feito" {% if frota['STATUS'] == "Feito" %}selected{% endif %}>Feito</option>
                                         <option value="Acidente" {% if frota['STATUS'] == "Acidente" %}selected{% endif %}>Acidente</option>
                                         <option value="Vendido" {% if frota['STATUS'] == "Vendido" %}selected{% endif %}>Vendido</option>
-                                        <option value="Frota Adesiva Errada" {% if frota['STATUS'] == "Frota Adesiva Errada" %}selected{% endif %}>Frota Adesiva Errada</option>
+                                        <option value="Frota Adesivada Errada" {% if frota['STATUS'] == "Frota Adesivada Errada" %}selected{% endif %}>Frota Adesivada Errada</option>
                                         <option value="Sem Identificação" {% if frota['STATUS'] == "Sem Identificação" %}selected{% endif %}>Sem Identificação</option>
                                         <option value="Manutenção Externa" {% if frota['STATUS'] == "Manutenção Externa" %}selected{% endif %}>Manutenção Externa</option>
                                         <option value="Não Encontrado" {% if frota['STATUS'] == "Não Encontrado" %}selected{% endif %}>Não Encontrado</option>
@@ -151,7 +155,8 @@
 
     <footer>
         <p>&copy; Rian Batista 2025</p>
-        <p>Versão 0.2.1</p>
+        <a href="https://github.com/Rian-Batista-Rx4n/">GitHub - Rx4n</a>
+        <p>Versão 0.3.0</p>
     </footer>
 
     <script src="../static/script/script.js"></script>

@@ -27,6 +27,7 @@ header {
     height: 64px;
     background: var(--cor-terceira);
     display: flex;
+    z-index: 2;
 }
 
 .texto-tiete-logo {
@@ -44,30 +45,6 @@ header {
     position: absolute;
     top: 6px;
     left: 6px;
-}
-
-.menu-button {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--cor-primaria);
-    cursor: pointer;
-    position: absolute;
-    right: 6px;
-    top: 6px;
-}
-
-#menu-box {
-    position: absolute;
-    top: 64px;
-    right: 0;
-    border-radius: 0 0 0 16px;
-    background: var(--cor-sexta);
-    width: 0px;
-    height: 0px;
-    font-size: 0px;
-    box-shadow: 24px 24px 24px rgba(0, 0, 0, 0.25);
-    transition: ease 0.2s;
 }
 
 .ficha-card {
@@ -160,13 +137,45 @@ form {
 
 footer {
     text-align: center;
-    height: 98px;
+    height: 108px;
     background: var(--cor-terceira);
     color: var(--cor-primaria);
     display: block;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.agregado-img {
+    margin: auto;
+    display: block;
+    width: 512px;
+    height: 512px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.agregado-controls {
+    margin: 36px auto;
+    text-align: center;
+}
+
+.tools-button-agregado {
+    cursor: pointer;
+    width: 98px;
+    height: 48px;
+    background: var(--cor-terceira);
+    border-radius: 18px;
+    border: none;
+    color: var(--cor-primaria);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    transition: ease 0.2s;
+    margin: -92px auto;
 }
 
 @media (max-width: 800px) {
@@ -180,14 +189,28 @@ footer {
         padding: 1em;
     }
     .agregado-img {
+        margin: auto;
+        display: block;
         width: 300px;
         height: 300px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
-}
-
-.agregado-controls {
-    margin: 36px auto;
-    text-align: center;
+    .tools-button-agregado {
+        width: 98px;
+        height: 48px;
+        background: var(--cor-terceira);
+        border-radius: 18px;
+        border: none;
+        color: var(--cor-primaria);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: bold;
+        font-size: 24px;
+        transition: ease 0.2s;
+        margin: -92px auto;
+    }
+    
 }
 
 .agregado-gallery {
@@ -195,16 +218,7 @@ footer {
     text-align: center;
     position: relative;
     min-height: 520px;
-}
-
-.agregado-img {
-    margin: auto;
-    display: block;
-    width: 512px;
-    height: 512px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
 

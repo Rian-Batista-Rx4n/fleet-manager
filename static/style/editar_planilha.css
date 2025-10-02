@@ -156,13 +156,15 @@ input {
 
 footer {
     text-align: center;
-    height: 98px;
+    height: 108px;
     background: var(--cor-terceira);
     color: var(--cor-primaria);
     display: block;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    text-decoration: none;
+    text-decoration-line: none;
 }
 
 @media (max-width: 800px) {

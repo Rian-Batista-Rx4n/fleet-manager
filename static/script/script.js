@@ -9,11 +9,11 @@ lower.addEventListener("click", LowerCase)
 
 let menuIsOpen = false
 
-var font_size = `18`
+var font_size = 18
 
 function UpperCase() {
     let font_size_ajust = document.querySelectorAll(".input-table")
-    font_size += 1
+    font_size += 2
     font_size_ajust.forEach(font => {
         font.style.fontSize = `${font_size}px`
     })
@@ -21,7 +21,7 @@ function UpperCase() {
 
 function LowerCase() {
     let font_size_ajust = document.querySelectorAll(".input-table")
-    font_size -= 1
+    font_size -= 2
     font_size_ajust.forEach(font => {
         font.style.fontSize = `${font_size}px`
     })
@@ -49,7 +49,7 @@ function menu_button_trigger() {
         menu.style.fontSize = `18px`
         menuIsOpen = true
 
-        salvar.style.top = `364px`
+        salvar.style.top = `246px`
         salvar.style.right = `86px`
 
         upper.style.width = `64px`
@@ -104,6 +104,7 @@ function sortTable(colIndex) {
 
     let sortDirection = sortDirections[colIndex] ?? true; // true = asc
 
+    // ===== ORDENAR =====
     rows.sort((a, b) => {
         let x = a.cells[colIndex].innerText.trim().toLowerCase();
         let y = b.cells[colIndex].innerText.trim().toLowerCase();
@@ -120,9 +121,26 @@ function sortTable(colIndex) {
         return 0;
     });
 
-    sortDirections[colIndex] = !sortDirection; // alterna direção
+    // Alterna direção
+    sortDirections[colIndex] = !sortDirection; 
+
+    // Atualiza tabela
     rows.forEach(row => table.appendChild(row));
+
+    // ===== ATUALIZAR SETAS =====
+    // Remove setas anteriores
+    document.querySelectorAll(".th-table").forEach(th => {
+        th.querySelector(".sort-arrow")?.remove();
+    });
+
+    // Adiciona seta no cabeçalho clicado
+    const th = document.querySelectorAll(".thead-table .th-table")[colIndex];
+    const arrow = document.createElement("span");
+    arrow.classList.add("sort-arrow");
+    arrow.textContent = sortDirection ? "▲" : "▼"; 
+    th.appendChild(arrow);
 }
+
 
 
 // ===== FILTRAR POR FROTA (otimizado com pré-indexação) =====
@@ -157,6 +175,8 @@ filterInput.addEventListener("input", debounce(function () {
 // =====--- RESUME-PUSH ---=====
 const resumePush = document.getElementById("resume-push");
 let resume_text = document.querySelectorAll(".resume-text")
+let arrow_resume1 = document.getElementById("arrows1")
+let arrow_resume2 = document.getElementById("arrows2")
 
 resumePush.addEventListener("click", () => {
     if (resumePush.classList.contains("collapsed")) {
@@ -165,12 +185,18 @@ resumePush.addEventListener("click", () => {
         resume_text.forEach(texto => {
             texto.style.fontSize = `15px`
         })
+
+        arrow_resume1.innerHTML = "▲▲"
+        arrow_resume2.innerHTML = "▲▲"
     } else {
         resumePush.classList.add("collapsed");
         resumePush.style.height = "28px";
         resume_text.forEach(texto => {
             texto.style.fontSize = `0px`
         })
+
+        arrow_resume1.innerHTML = "▼▼"
+        arrow_resume2.innerHTML = "▼▼"
     }
 });
 
