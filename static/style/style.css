@@ -89,7 +89,7 @@ header {
 
 .tools-box {
     display: flex;
-    margin: 8px;
+    margin: 2px auto;
     text-align: center;
     justify-content: center;
     gap: 12px;
@@ -221,7 +221,7 @@ footer {
 }
 
 .filter-box {
-    margin: 12px auto;
+    margin: 98px auto;
     width: 90%;
     text-align: center;
 }
@@ -254,7 +254,7 @@ footer {
 
 .font-size-tool{
     display: flex;
-    margin: 4px auto;
+    margin: 0px auto;
     gap: 12px;
     text-align: center;
     justify-content: center;

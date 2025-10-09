@@ -56,27 +56,22 @@
     </div>
 
     <div id="menu-box">
+        <div class="filter-box">
+            <label for="filter">Buscar Frota:</label>
+            <input type="text" id="filter" placeholder="">
+        </div>
+
         <div class="tools-box">
-            <form action="/importar_excel" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" id="file" accept=".xlsx,.xls" required hidden onchange="this.form.submit()">
-                <label for="file" class="tools-button">Importar Excel</label>
-            </form>
             <form action="/editar" method="get">
                 <button type="submit" class="tools-button">Editar</button>
             </form>
             <form action="/baixar" method="get">
                 <button type="submit" class="tools-button">Gerar Excel</button>
             </form>
-        </div>
-
-        <div class="filter-box">
-            <label for="filter">Buscar Frota:</label>
-            <input type="text" id="filter" placeholder="">
-        </div>
-
-        <div class="font-size-tool">
-            <img src="../static/images/font_uppercase_icon.png" alt="Uppercase Icon" id="uppercase-button">
-            <img src="../static/images/font_lowercase_icon.png" alt="Lowercase Icon" id="lowercase-button">
+            <form action="/importar_excel" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" accept=".xlsx,.xls" required hidden onchange="this.form.submit()">
+                <label for="file" class="tools-button">Importar Excel</label>
+            </form>
         </div>
     </div>
     
@@ -156,7 +151,7 @@
     <footer>
         <p>&copy; Rian Batista 2025</p>
         <a href="https://github.com/Rian-Batista-Rx4n/">GitHub - Rx4n</a>
-        <p>Versão 0.3.0</p>
+        <p>Versão 0.3.1</p>
     </footer>
 
     <script src="../static/script/script.js"></script>

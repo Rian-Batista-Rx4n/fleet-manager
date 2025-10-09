@@ -1,31 +1,7 @@
 const menu_button = document.getElementById("menu-button")
-
-let upper = document.getElementById("uppercase-button")
-let lower = document.getElementById("lowercase-button")
-
 menu_button.addEventListener("click", menu_button_trigger)
-upper.addEventListener("click", UpperCase)
-lower.addEventListener("click", LowerCase)
 
 let menuIsOpen = false
-
-var font_size = 18
-
-function UpperCase() {
-    let font_size_ajust = document.querySelectorAll(".input-table")
-    font_size += 2
-    font_size_ajust.forEach(font => {
-        font.style.fontSize = `${font_size}px`
-    })
-}
-
-function LowerCase() {
-    let font_size_ajust = document.querySelectorAll(".input-table")
-    font_size -= 2
-    font_size_ajust.forEach(font => {
-        font.style.fontSize = `${font_size}px`
-    })
-}
 
 function menu_button_trigger() {
     let menu = document.getElementById("menu-box")
@@ -49,15 +25,8 @@ function menu_button_trigger() {
         menu.style.fontSize = `18px`
         menuIsOpen = true
 
-        salvar.style.top = `246px`
+        salvar.style.top = `86px`
         salvar.style.right = `86px`
-
-        upper.style.width = `64px`
-        upper.style.height = `64px`
-        lower.style.width = `64px`
-        lower.style.height = `64px`
-        upper.style.background = `var(--cor-terceira)`
-        lower.style.background = `var(--cor-terceira)`
 
         buttons.forEach(btn => {
             btn.style.fontSize = `24px`
@@ -79,13 +48,6 @@ function menu_button_trigger() {
 
         salvar.style.top = `-10px`
         salvar.style.right = `-10px`
-
-        upper.style.width = `0px`
-        upper.style.height = `0px`
-        lower.style.width = `0px`
-        lower.style.height = `0px`
-        upper.style.background = `none`
-        lower.style.background = `none`
 
         buttons.forEach(btn => {
             btn.style.fontSize = `0px`
