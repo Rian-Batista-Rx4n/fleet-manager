@@ -110,6 +110,7 @@ header {
     transition: ease 0.2s;
     line-height: 24px;
     transition: ease 0.1s;
+    margin: 4px;
 }
 
 .tools-button:hover {
@@ -260,17 +261,6 @@ footer {
     justify-content: center;
 }
 
-#uppercase-button, #lowercase-button {
-    margin-top: 64px;
-    width: 0px;
-    height: 0px;
-    background: none;
-    border-radius: 12px;
-    padding: 2px;
-    text-align: center;
-    cursor: pointer;
-}
-
 #resume-push {
     position: fixed;
     z-index: 8;
@@ -343,4 +333,9 @@ footer {
     display: flex;
     text-align: center;
     justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+    color: var(--cor-primaria);
 }
